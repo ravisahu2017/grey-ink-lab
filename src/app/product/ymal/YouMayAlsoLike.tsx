@@ -29,7 +29,7 @@ export default function YouMayAlsoLike({ id }: YouMayAlsoLikeProps) {
             </div>
             <div className="rel-grid">
                 {products && products.length > 0 && products.map((p: any, index: number) => (
-                    <div key={index} className="rel-card fu fu-d1">
+                    <div key={index} className={`rel-card fu fu-d${(index % 4) + 1} vis`}>
                         <div className="rel-img">
                             <img src={p.images[0].src} alt={p.images[0].alt} />
                         </div>
