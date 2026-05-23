@@ -75,8 +75,8 @@ export default function Product({ id }: ProductProps) {
                                 </button>
                                 <div className={`acc-body ${openAccordian === item.name ? 'open' : ''}`}>
                                     <div className="acc-content"><ul>
-                                        {item.options.map((option: any) => (
-                                            <li>{option}</li>
+                                        {item.options.map((option: any, index: number) => (
+                                            <li key={index}>{option}</li>
                                         ))}
                                     </ul></div>
                                 </div>
