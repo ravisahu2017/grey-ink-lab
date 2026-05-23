@@ -1,0 +1,99 @@
+.related {
+    padding: 88px 52px;
+    border-top: 0.5px solid var(--border);
+}
+
+.rel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 0.5px solid var(--border);
+}
+
+.rel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--ink);
+}
+
+.rel-va {
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--stone-light);
+    padding-bottom: 2px;
+}
+
+.rel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.rel-card {
+    cursor: pointer;
+}
+
+.rel-img {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #E0DCD4;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.rel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s cubic-bezier(.25, .46, .45, .94);
+}
+
+.rel-card:hover .rel-img img {
+    transform: scale(1.06);
+}
+
+.rel-ov {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 18, 15, .18);
+    opacity: 0;
+    transition: opacity .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rel-card:hover .rel-ov {
+    opacity: 1;
+}
+
+.rel-ov span {
+    font-size: 8px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: #F5F0E8;
+    border: .5px solid rgba(245, 240, 232, .6);
+    padding: 9px 18px;
+}
+
+.rel-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 3px;
+}
+
+.rel-price {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--stone);
+}
