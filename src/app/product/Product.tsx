@@ -24,6 +24,90 @@ export default function Product({ id }: ProductProps) {
         fetchProduct();
     }, [id]);
 
+    const materialSection = () => {
+        return (
+            <section className="material-section fu vis">
+                <div className="mat-visual">
+                    <img src="http://localhost:8080/wp-content/uploads/2026/05/a1.jpeg" alt="" />
+                </div>
+                <div className="mat-copy">
+                    <div className="mat-label">Material & Making</div>
+                    <h2 className="mat-hl">Cast in concrete.<br /><em>Finished by hand.</em><br />Marked for life.</h2>
+                    <p className="mat-body">The Humpback begins as a mould — shaped and refined over multiple pours until the form is right. Concrete is mixed by hand, poured slowly, and left to cure for 48 hours. What comes out is sanded, sealed, and pressed with the GIL mark at its base. No two pieces are identical. The irregularities in surface are not imperfections — they are the proof of how it was made.</p>
+                    <div className="mat-specs">
+                        <div className="spec-row">
+                            <span className="spec-key">Material</span>
+                            <span className="spec-val">Cast concrete, matte sealed</span>
+                        </div>
+                        <div className="spec-row">
+                            <span className="spec-key">Dimensions</span>
+                            <span className="spec-val">24 × 14 × 9 cm</span></div>
+                        <div className="spec-row">
+                            <span className="spec-key">Weight</span>
+                            <span className="spec-val">~1.4 kg</span>
+                        </div>
+                        <div className="spec-row">
+                            <span className="spec-key">Origin</span>
+                            <span className="spec-val">Made in Delhi, India</span>
+                        </div>
+                        <div className="spec-row">
+                            <span className="spec-key">Edition</span>
+                            <span className="spec-val">Open edition, made to order</span>
+                        </div>
+                        <div className="spec-row">
+                            <span className="spec-key">Maker</span>
+                            <span className="spec-val">Mohit Vijh, Greyinklab</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    const howItsMade = () => {
+        const stepData = [
+            {
+                number: "01",
+                title: "The Mould",
+                description: "Each form begins as a handmade mould — shaped, refined, and tested across multiple pours until the proportion feels right. The Humpback mould took eleven iterations."
+            },
+            {
+                number: "02",
+                title: "The Pour",
+                description: "Concrete is mixed by hand to a specific consistency and poured slowly. Trapped air is worked out manually. Each pour takes around 20 minutes per piece."
+            },
+            {
+                number: "03",
+                title: "The Cure",
+                description: "Each piece cures for a minimum of 48 hours before demoulding. Rushed curing causes cracking. The weight you feel when you hold it comes from this full cure."
+            },
+            {
+                number: "04",
+                title: "The Finish",
+                description: "Surface is hand-sanded progressively. The GIL mark is pressed into the base. A matte sealer is applied. The piece is photographed and inspected before packing."
+            }
+        ];
+
+        return (
+            <section className="process-section fu">
+                <div className="process-header">
+                    <h2 className="process-hl">How it's<br /><em>made.</em></h2>
+                    <div className="process-sub">Four steps.<br />48 hours minimum.<br />One person.</div>
+                </div>
+                <div className="process-steps">
+                    {stepData.map((step: any, index: number) => (
+                        <div className="step" key={index}>
+                            <div className="step-num">{step.number}</div>
+                            <div className="step-title">{step.title}</div>
+                            <p className="step-desc">{step.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        )
+    }
+
+
     return (
         <>
             <section className="product-hero" id={product?.id}>
@@ -86,7 +170,8 @@ export default function Product({ id }: ProductProps) {
                 </div>
             </section>
 
+            {materialSection()}
+            {howItsMade()}
             <YouMayAlsoLike />
-        </>
-    )
+        </>)
 } 

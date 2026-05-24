@@ -21,6 +21,10 @@ export default function YouMayAlsoLike({ id }: YouMayAlsoLikeProps) {
         fetchRelatedProducts();
     }, []);
 
+    const goToProduct = (id: string) => {
+        window.location.href = `/product?id=${id}`;
+    }
+
     return (
         <section className="related">
             <div className="rel-header">
@@ -29,7 +33,7 @@ export default function YouMayAlsoLike({ id }: YouMayAlsoLikeProps) {
             </div>
             <div className="rel-grid">
                 {products && products.length > 0 && products.map((p: any, index: number) => (
-                    <div key={index} className={`rel-card fu fu-d${(index % 4) + 1} vis`}>
+                    <div key={p.id} className={`rel-card fu fu-d${(index % 4) + 1} vis`} onClick={() => goToProduct(p.slug)}>
                         <div className="rel-img">
                             <img src={p.images[0].src} alt={p.images[0].alt} />
                         </div>
