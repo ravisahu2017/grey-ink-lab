@@ -21,8 +21,8 @@ export default function AlsoExplore({ currentCategory }: { currentCategory: numb
             <div className="ae-grid">
                 {
                     categories?.filter((category: any) => category.id !== currentCategory).map((category: any) => (
-                        <div className="ae-card" key={category.name}>
-                            <img src={category.image?.src} alt="" />
+                        <div className="ae-card" key={category.name} onClick={() => window.location.href = `/catalogue/${category.slug}`}>
+                            <img src={category.image?.src} alt={category.name} />
                             <div className="ae-overlay"></div>
                             <div className="ae-info">
                                 <div className="ae-name">{category.name}</div>

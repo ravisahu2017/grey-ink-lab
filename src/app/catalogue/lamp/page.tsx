@@ -1,9 +1,9 @@
-import TissueHolder from "./TissueHolder";
+import Lamp from "./Lamp";
 
 export default async function Page() {
   return (
     <main className="min-h-screen">
-      <TissueHolder />
+      <Lamp />
     </main>
   );
 }
