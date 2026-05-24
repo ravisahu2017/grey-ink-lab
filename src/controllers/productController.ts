@@ -1,3 +1,4 @@
+import { Product } from "@/models/product";
 import { woocommerceApi } from "@/utils/api";
 
 const mapProductData = (p: any) => ({
@@ -12,13 +13,29 @@ const mapProductData = (p: any) => ({
     sale_price: p.sale_price,
     sku: p.sku,
     attributes: p.attributes,
-    slug: p.slug
+    slug: p.slug,
+    meta_data: p.meta_data
 })
 
 export default class ProductController {
-    static async getProducts() {
+
+    static async getProducts({ category, slug }: { category?: number, slug?: string }): Promise<Product[]> {
         try {
-            const response = await woocommerceApi.get(`/products`);
+            let url = '/products';
+            let params = ''
+            if (category) {
+                params += `category=${encodeURIComponent(category)}&`;
+            }
+            if (slug) {
+                params += `slug=${encodeURIComponent(slug)}&`;
+            }
+
+            if (params.length > 0) {
+                params = params.slice(0, -1);
+                url += `?${params}`;
+            }
+
+            const response = await woocommerceApi.get(url);
             let list: Product[] = [];
             if (response.data.length > 0) {
                 list = response.data.map((p: any) => mapProductData(p));
@@ -39,5 +56,20 @@ export default class ProductController {
         } catch (error: any) {
             throw new Error(error.message);
         }
+    }
+
+
+    static getTitleSubscript(p: Product): string {
+        if (!p || !p.meta_data || p.meta_data.length === 0) {
+            return '';
+        }
+        return p.meta_data.find((m: any) => m.key === 'title_subscript')?.value || '';
+    }
+
+    static isBestSeller(p: Product): boolean {
+        if (!p || !p.meta_data || p.meta_data.length === 0) {
+            return false;
+        }
+        return p.meta_data.find((m: any) => m.key === 'best_seller')?.value || false;
     }
 }

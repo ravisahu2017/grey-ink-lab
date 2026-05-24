@@ -5,24 +5,18 @@ import productController from "@/controllers/productController";
 import { useEffect, useState } from "react";
 import YouMayAlsoLike from "./ymal/YouMayAlsoLike";
 import LifeGrid from "./lifeGrid";
-import howItsMade from "./howItsMade";
 import HowItsMade from "./howItsMade";
-import materialSection from "./materialSection";
 import MaterialSection from "./materialSection";
 import CareSection from "./careSection";
 import DarkBand from "./darkBand";
 
-interface ProductProps {
-    id?: string;
-}
-
-export default function Product({ id }: ProductProps) {
+export default function Product({ slug }: { slug?: string }) {
     const [product, setProduct] = useState<any>(null);
     const [openAccordian, setOpenAccordian] = useState<string>('');
     const [accordianData, setAccordianData] = useState<any[]>([]);
 
     const fetchProduct = async () => {
-        const response = await productController.getProductById(id ?? '');
+        const response = await productController.getProductById(slug ?? '');
         setProduct(response[0]);
         setAccordianData(response[0].attributes);
     }
@@ -31,7 +25,7 @@ export default function Product({ id }: ProductProps) {
 
     useEffect(() => {
         fetchProduct();
-    }, [id]);
+    }, [slug]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -65,7 +59,7 @@ export default function Product({ id }: ProductProps) {
                 <div className="product-info">
                     <div className="prod-collection">Collectibles — From the Studio</div>
                     <h1 className="prod-name">{product?.name}</h1>
-                    <div className="prod-subtitle">Cast concrete, hand-finished · One of a kind</div>
+                    <div className="prod-subtitle">{productController.getTitleSubscript(product)}</div>
                     <div className="prod-price flex items-center gap-2">
                         <span>Rs </span>
                         {product?.regular_price === product?.sale_price ? (
@@ -133,5 +127,6 @@ export default function Product({ id }: ProductProps) {
                 </div>
                 <button className="sticky-btn">Add to Cart</button>
             </div>
-        </>)
+        </>
+    )
 } 
