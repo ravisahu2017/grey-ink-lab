@@ -1,9 +1,9 @@
-import Home from "./home/Home";
+import TissueHolder from "./TissueHolder";
 
 export default async function Page() {
   return (
     <main className="min-h-screen">
-      <Home />
+      <TissueHolder />
     </main>
   );
 }

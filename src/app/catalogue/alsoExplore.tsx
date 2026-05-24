@@ -1,4 +1,3 @@
-import "./ae.css"
 import "@/app/globals.css"
 import ProductController from "@/controllers/productController";
 import { useEffect, useState } from "react";

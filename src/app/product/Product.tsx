@@ -119,7 +119,7 @@ export default function Product({ slug }: { slug?: string }) {
             <LifeGrid />
             <CareSection />
             <DarkBand />
-            <YouMayAlsoLike />
+            <YouMayAlsoLike id={product?.id} />
             <div className={`sticky-bar ${isStickyVisible ? 'visible' : ''}`} id="stickyBar">
                 <div className="sticky-info">
                     <span className="sticky-name">{product?.name}</span>

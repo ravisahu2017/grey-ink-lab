@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
 
-export default function TissueHolder() {
-    const categoryId = 21;
+export default function CosmosCollection() {
+    const categoryId = 23;
     const [products, setProducts] = useState<Product[]>([]);
     const router = useRouter();
     const fetchRelatedProducts = async () => {

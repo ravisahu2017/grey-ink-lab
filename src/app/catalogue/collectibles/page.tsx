@@ -1,9 +1,9 @@
-import Home from "./home/Home";
+import Collectibles from "./Collectibles";
 
 export default async function Page() {
   return (
     <main className="min-h-screen">
-      <Home />
+      <Collectibles />
     </main>
   );
 }

@@ -1,9 +1,9 @@
-import Home from "./home/Home";
+import CosmosCollection from "./cosmos";
 
 export default async function Page() {
   return (
     <main className="min-h-screen">
-      <Home />
+      <CosmosCollection />
     </main>
   );
 }

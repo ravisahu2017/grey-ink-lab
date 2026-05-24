@@ -4,15 +4,11 @@ import "./ymal.css";
 import { useEffect, useState } from "react";
 import productController from "@/controllers/productController";
 
-interface YouMayAlsoLikeProps {
-    id?: string;
-}
-
-export default function YouMayAlsoLike({ id }: YouMayAlsoLikeProps) {
+export default function YouMayAlsoLike({ id }: { id: string }) {
     const [products, setProducts] = useState<any>(null);
 
     const fetchRelatedProducts = async () => {
-        const response = await productController.getProducts();
+        const response = await productController.getProducts({});
         const filterProducts = response.filter((p: any) => p.id !== id).slice(0, 4);
         setProducts(filterProducts);
     }
