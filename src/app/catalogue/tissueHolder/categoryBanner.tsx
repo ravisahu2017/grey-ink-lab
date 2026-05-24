@@ -1,7 +1,7 @@
 export default function CategoryBanner() {
 
     return (
-        <div className="cat-banner fu vis">
+        <div className="cat-banner fu">
             <div className="cb-visual">
                 <img src="http://localhost:8080/wp-content/uploads/2026/05/lg3.jpeg" alt="Category Banner" />
             </div>

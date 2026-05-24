@@ -39,6 +39,10 @@ body {
   cursor: none;
 }
 
+main {
+  padding-top: 68px;
+}
+
 .cur {
   position: fixed;
   width: 7px;
@@ -126,7 +130,7 @@ nav {
 }
 
 .breadcrumb {
-  padding: 96px 52px 0;
+  padding: 28px 52px 0;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -927,7 +931,7 @@ footer {
   }
 
   .breadcrumb {
-    padding: 88px 20px 0;
+    padding: 20px 20px 0;
   }
 
   .product-hero {
@@ -1011,7 +1015,7 @@ footer {
 /* CATALOGUE AND PRODUCT GRID STYLES */
 /* BREADCRUMB */
 .bc {
-  padding: 88px 52px 0;
+  padding: 20px 52px 0;
   display: flex;
   gap: 7px;
   align-items: center;
@@ -1450,7 +1454,7 @@ footer {
 
 @media(max-width:880px) {
   .bc {
-    padding: 88px 20px 0;
+    padding: 20px 20px 0;
   }
 
   .cat-header {

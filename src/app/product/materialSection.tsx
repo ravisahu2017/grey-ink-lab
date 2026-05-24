@@ -1,6 +1,6 @@
 export default function MaterialSection() {
     return (
-        <section className="material-section fu vis">
+        <section className="material-section fu">
             <div className="mat-visual">
                 <img src="http://localhost:8080/wp-content/uploads/2026/05/a1.jpeg" alt="" />
             </div>

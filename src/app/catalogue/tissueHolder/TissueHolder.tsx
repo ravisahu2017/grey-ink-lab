@@ -23,7 +23,7 @@ export default function TissueHolder() {
 
     return (
         <>
-            <div className="cat-header fu vis">
+            <div className="cat-header fu">
                 <div>
                     <div className="cat-eyebrow">Collectibles — From the Studio</div>
                     <h1 className="cat-h1">Tissue Holder<br /><em>Sculptures</em></h1>
@@ -56,7 +56,7 @@ export default function TissueHolder() {
 
             <div className="cat-grid">
                 {products.map((product: Product) => (
-                    <div className="pc fu vis" key={product.id}>
+                    <div className="pc fu" key={product.id}>
                         <div className="pc-img">
                             <img src={product.images[0].src} alt={product.name} />
                             <div className="pc-ov"><div className="pc-ov-btn" onClick={() => { router.push(`/product?id=${product.sku}`) }}>Quick View</div></div>

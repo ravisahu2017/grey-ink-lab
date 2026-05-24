@@ -19,7 +19,7 @@ export default function DarkBand() {
     ]
 
     return (
-        <div className="dark-band fu vis">
+        <div className="dark-band fu">
             {data.map((item: any) => (
                 <div className="db-item">
                     <div className="db-num">{item.num}</div>

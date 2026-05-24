@@ -17,7 +17,7 @@ export default function CareSection() {
         }
     ]
     return (
-        <section className="care-section fu vis">
+        <section className="care-section fu">
             {data.map((item: any) => (
                 <div className="care-card">
                     <div className="care-icon-wrap">

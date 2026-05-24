@@ -19,6 +19,15 @@ const mapProductData = (p: any) => ({
 
 export default class ProductController {
 
+    static async getCategories(): Promise<any[]> {
+        try {
+            const response = await woocommerceApi.get('/products/categories');
+            return response.data;
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+
     static async getProducts({ category, slug }: { category?: number, slug?: string }): Promise<Product[]> {
         try {
             let url = '/products';

@@ -23,7 +23,7 @@ export default function HowItsMade() {
     ];
 
     return (
-        <section className="process-section fu vis">
+        <section className="process-section fu">
             <div className="process-header">
                 <h2 className="process-hl">How it's<br /><em>made.</em></h2>
                 <div className="process-sub">Four steps.<br />48 hours minimum.<br />One person.</div>
