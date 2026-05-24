@@ -27,9 +27,24 @@ export default function Product({ id }: ProductProps) {
         setAccordianData(response[0].attributes);
     }
 
+    const [isStickyVisible, setIsStickyVisible] = useState(false);
+
     useEffect(() => {
         fetchProduct();
     }, [id]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const hero = document.querySelector('.product-hero');
+            if (hero) {
+                const rect = hero.getBoundingClientRect();
+                setIsStickyVisible(rect.bottom <= 0);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <>
@@ -51,7 +66,19 @@ export default function Product({ id }: ProductProps) {
                     <div className="prod-collection">Collectibles — From the Studio</div>
                     <h1 className="prod-name">{product?.name}</h1>
                     <div className="prod-subtitle">Cast concrete, hand-finished · One of a kind</div>
-                    <div className="prod-price" dangerouslySetInnerHTML={{ __html: product?.price_html }}></div>
+                    <div className="prod-price flex items-center gap-2">
+                        <span>Rs </span>
+                        {product?.regular_price === product?.sale_price ? (
+                            <span className="amount">{product?.sale_price}</span>
+                        ) : (
+                            <>
+                                <span className="amount">{product?.sale_price}</span>
+                                <del aria-hidden="true">
+                                    <span className="woocommerce-Price-amount amount">{product?.regular_price}</span>
+                                </del>
+                            </>
+                        )}
+                    </div>
                     <div className="prod-tax">Incl. taxes · Free shipping above Rs 1,500</div>
                     <div className="availability">
                         <div className="avail-dot"></div>
@@ -64,7 +91,7 @@ export default function Product({ id }: ProductProps) {
                         <button className="variant-btn">Charcoal</button>
                     </div>
                     <button className="add-to-cart" id="addBtn">Add to Cart</button>
-                    <button className="wishlist-btn">Save to Wishlist</button>
+                    {/* <button className="wishlist-btn">Save to Wishlist</button> */}
                     <p className="short-desc" dangerouslySetInnerHTML={{ __html: product?.short_description }}></p>
                     <div className="meta-row">
                         <span className="meta-pill">Cast Concrete</span>
@@ -99,5 +126,12 @@ export default function Product({ id }: ProductProps) {
             <CareSection />
             <DarkBand />
             <YouMayAlsoLike />
+            <div className={`sticky-bar ${isStickyVisible ? 'visible' : ''}`} id="stickyBar">
+                <div className="sticky-info">
+                    <span className="sticky-name">{product?.name}</span>
+                    <span className="sticky-price">Rs {product?.price}</span>
+                </div>
+                <button className="sticky-btn">Add to Cart</button>
+            </div>
         </>)
 } 

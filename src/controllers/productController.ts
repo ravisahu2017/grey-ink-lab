@@ -8,6 +8,8 @@ const mapProductData = (p: any) => ({
     description: p.description,
     short_description: p.short_description,
     price_html: p.price_html,
+    regular_price: p.regular_price,
+    sale_price: p.sale_price,
     sku: p.sku,
     attributes: p.attributes,
     slug: p.slug
