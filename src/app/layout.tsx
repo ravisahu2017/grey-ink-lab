@@ -5,7 +5,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import ScrollObserver from "@/components/ScrollObserver";
 import { CartProvider } from "@/context/CartContext";
-import CartDrawer from "@/components/CartDrawer";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
