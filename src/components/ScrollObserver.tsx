@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollObserver() {
+    const pathname = usePathname();
+
     useEffect(() => {
         const observerOptions = {
             root: null,
@@ -26,7 +29,7 @@ export default function ScrollObserver() {
             });
         };
 
-        // Run initially
+        // Run initially for the current page
         observeNewElements();
 
         // Use MutationObserver to watch for dynamic DOM updates (like fetched API products)
@@ -52,7 +55,7 @@ export default function ScrollObserver() {
             observer.disconnect();
             mutationObserver.disconnect();
         };
-    }, []);
+    }, [pathname]);
 
     return null;
 }

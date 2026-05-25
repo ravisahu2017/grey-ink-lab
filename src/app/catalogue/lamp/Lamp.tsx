@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { Product } from "@/models/product";
 import productController from "@/controllers/productController";
 import { useRouter } from "next/navigation";
+import { useCategory } from "@/context/CategoryContext";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
 
 export default function Lamp() {
-    const categoryId = 22;
+    const { getCategoryIdBySlug } = useCategory();
+    const categoryId = getCategoryIdBySlug("lamp") || getCategoryIdBySlug("lamps") || 22;
     const [products, setProducts] = useState<Product[]>([]);
     const router = useRouter();
     const fetchRelatedProducts = async () => {
@@ -18,8 +20,10 @@ export default function Lamp() {
     }
 
     useEffect(() => {
-        fetchRelatedProducts();
-    }, []);
+        if (categoryId) {
+            fetchRelatedProducts();
+        }
+    }, [categoryId]);
 
     return (
         <>

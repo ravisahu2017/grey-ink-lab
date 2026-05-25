@@ -1,16 +1,9 @@
 import "@/app/globals.css"
-import ProductController from "@/controllers/productController";
-import { useEffect, useState } from "react";
-
+import { useCategory } from "@/context/CategoryContext";
 
 export default function AlsoExplore({ currentCategory }: { currentCategory: number }) {
-    const [categories, setCategories] = useState<any[]>([]);
-    useEffect(() => {
-        ProductController.getCategories().then((data: any) => {
-            data = data.filter((category: any) => (category.slug !== 'uncategorized' && category.id !== currentCategory));
-            setCategories(data);
-        });
-    }, []);
+    const { categories } = useCategory();
+    const displayCategories = categories.filter((category: any) => category.id !== currentCategory);
 
     return (
         <div className="also-explore fu">
@@ -20,7 +13,7 @@ export default function AlsoExplore({ currentCategory }: { currentCategory: numb
             </div>
             <div className="ae-grid">
                 {
-                    categories?.filter((category: any) => category.id !== currentCategory).map((category: any) => (
+                    displayCategories.map((category: any) => (
                         <div className="ae-card" key={category.name} onClick={() => window.location.href = `/catalogue/${category.slug}`}>
                             <img src={category.image?.src} alt={category.name} />
                             <div className="ae-overlay"></div>

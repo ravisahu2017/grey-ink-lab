@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { Product } from "@/models/product";
 import productController from "@/controllers/productController";
 import { useRouter } from "next/navigation";
+import { useCategory } from "@/context/CategoryContext";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
-import Collectibles from "../collectibles/Collectibles";
 
 export default function CosmosCollection() {
-    const categoryId = 23;
+    const { getCategoryIdBySlug } = useCategory();
+    const categoryId = getCategoryIdBySlug("cosmos-collection") || 23;
     const [products, setProducts] = useState<Product[]>([]);
     const router = useRouter();
     const fetchRelatedProducts = async () => {
@@ -19,8 +20,10 @@ export default function CosmosCollection() {
     }
 
     useEffect(() => {
-        fetchRelatedProducts();
-    }, []);
+        if (categoryId) {
+            fetchRelatedProducts();
+        }
+    }, [categoryId]);
 
     return (
         <>

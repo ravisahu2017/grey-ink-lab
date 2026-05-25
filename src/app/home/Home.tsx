@@ -1,19 +1,12 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react";
-import productController from "@/controllers/productController";
+import { useCategory } from "@/context/CategoryContext";
 import CategoryGrid from "./categoryGrid";
 import Category from "./category";
 import "./hero.css";
 
 export default function Home() {
-    const [categories, setCategories] = useState<any[]>([]);
-    useEffect(() => {
-        productController.getCategories().then((data: any) => {
-            data = data.filter((category: any) => (category.slug !== 'uncategorized'));
-            setCategories(data);
-        });
-    }, []);
+    const { categories, isLoading } = useCategory();
 
     const tissueHolderCategory = categories.find((category: any) => category.slug === 'tissue-holder');
     const heroImage = tissueHolderCategory?.image?.src || `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-content/uploads/2026/05/product_1.jpeg`;

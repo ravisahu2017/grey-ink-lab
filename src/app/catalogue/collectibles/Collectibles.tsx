@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { Product } from "@/models/product";
 import productController from "@/controllers/productController";
 import { useRouter } from "next/navigation";
+import { useCategory } from "@/context/CategoryContext";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
 
 export default function Collectibles() {
-    const categoryId = 24;
+    const { getCategoryIdBySlug } = useCategory();
+    const categoryId = getCategoryIdBySlug("collectibles") || 24;
     const [products, setProducts] = useState<Product[]>([]);
     const router = useRouter();
     const fetchRelatedProducts = async () => {
@@ -18,8 +20,10 @@ export default function Collectibles() {
     }
 
     useEffect(() => {
-        fetchRelatedProducts();
-    }, []);
+        if (categoryId) {
+            fetchRelatedProducts();
+        }
+    }, [categoryId]);
 
     return (
         <>
