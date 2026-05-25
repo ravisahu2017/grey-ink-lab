@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import OrderController from "@/controllers/orderController";
 import "./myOrders.css";
 
@@ -10,6 +11,8 @@ export default function MyOrders() {
     const [ordersList, setOrdersList] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    useScrollAnimation(ordersList);
+    useScrollAnimation(orderId);
 
     // Read ID query param on client side safely
     useEffect(() => {

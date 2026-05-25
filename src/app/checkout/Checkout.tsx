@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import OrderController from "@/controllers/orderController";
 import "./checkout.css";
 
 export default function Checkout() {
     const { cartItems, cartSubtotal, clearCart } = useCart();
+    useScrollAnimation(cartItems);
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
