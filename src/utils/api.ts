@@ -30,12 +30,19 @@ class ApiService {
   }
 
   private getAuthUrl(endpoint: string): string {
-    const url = `${this.baseUrl}${endpoint}`;
-    const key = process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_KEY;
-    const secret = process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_SECRET;
-    if (!key || !secret) return url;
-    const separator = url.includes('?') ? '&' : '?';
-    return `${url}${separator}consumer_key=${key}&consumer_secret=${secret}`;
+    const isServer = typeof window === "undefined";
+    if (isServer) {
+      const url = `${this.baseUrl}${endpoint}`;
+      const key = process.env.WOOCOMMERCE_CONSUMER_KEY || process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_KEY;
+      const secret = process.env.WOOCOMMERCE_CONSUMER_SECRET || process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_SECRET;
+      if (!key || !secret) return url;
+      const separator = url.includes('?') ? '&' : '?';
+      return `${url}${separator}consumer_key=${key}&consumer_secret=${secret}`;
+    } else {
+      const [path, queryString] = endpoint.split("?");
+      const targetQuery = queryString ? `&${queryString}` : "";
+      return `${this.baseUrl}?path=${path}${targetQuery}`;
+    }
   }
 
   /**
@@ -312,5 +319,8 @@ class ApiService {
 }
 
 export default ApiService;
-const baseUrl = `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-json/wc/v3`;
+const isServer = typeof window === "undefined";
+const baseUrl = isServer
+  ? `${process.env.WP_BACKEND_BASE || process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-json/wc/v3`
+  : "/api/woocommerce";
 export const woocommerceApi = new ApiService(baseUrl);
