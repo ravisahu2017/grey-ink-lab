@@ -7,6 +7,7 @@ import productController from "@/controllers/productController";
 import { useRouter } from "next/navigation";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
+import Collectibles from "../collectibles/Collectibles";
 
 export default function CosmosCollection() {
     const categoryId = 23;
@@ -26,7 +27,7 @@ export default function CosmosCollection() {
             <div className="cat-header fu">
                 <div>
                     <div className="cat-eyebrow">Collectibles — From the Studio</div>
-                    <h1 className="cat-h1">{category.name}<br /><em>Sculptures</em></h1>
+                    <h1 className="cat-h1">Cosmos Collection<br /><em>Sculptures</em></h1>
                 </div>
                 <div>
                     <p className="cat-desc">Everyday things made worth noticing. Each tissue holder is cast in concrete and finished by hand — designed to hold quiet presence on your desk, your bedside, wherever it lives with you. No two are identical.</p>
