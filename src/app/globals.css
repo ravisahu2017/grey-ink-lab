@@ -1489,3 +1489,26 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+.nav-cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--ink);
+  color: #F5F0E8;
+  font-family: 'Jost', sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

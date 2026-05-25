@@ -9,11 +9,14 @@ import HowItsMade from "./howItsMade";
 import MaterialSection from "./materialSection";
 import CareSection from "./careSection";
 import DarkBand from "./darkBand";
+import { useCart } from "@/context/CartContext";
 
 export default function Product({ slug }: { slug?: string }) {
+    const { addToCart } = useCart();
     const [product, setProduct] = useState<any>(null);
     const [openAccordian, setOpenAccordian] = useState<string>('');
     const [accordianData, setAccordianData] = useState<any[]>([]);
+    const [selectedFinish, setSelectedFinish] = useState<string>("Raw Concrete");
 
     const fetchProduct = async () => {
         const response = await productController.getProductById(slug ?? '');
@@ -80,11 +83,43 @@ export default function Product({ slug }: { slug?: string }) {
                     </div>
                     <div className="variant-label">Finish</div>
                     <div className="variant-grid">
-                        <button className="variant-btn active">Raw Concrete</button>
-                        <button className="variant-btn">Matte White</button>
-                        <button className="variant-btn">Charcoal</button>
+                        <button
+                            className={`variant-btn ${selectedFinish === "Raw Concrete" ? "active" : ""}`}
+                            onClick={() => setSelectedFinish("Raw Concrete")}
+                        >
+                            Raw Concrete
+                        </button>
+                        <button
+                            className={`variant-btn ${selectedFinish === "Matte White" ? "active" : ""}`}
+                            onClick={() => setSelectedFinish("Matte White")}
+                        >
+                            Matte White
+                        </button>
+                        <button
+                            className={`variant-btn ${selectedFinish === "Charcoal" ? "active" : ""}`}
+                            onClick={() => setSelectedFinish("Charcoal")}
+                        >
+                            Charcoal
+                        </button>
                     </div>
-                    <button className="add-to-cart" id="addBtn">Add to Cart</button>
+                    <button
+                        className="add-to-cart"
+                        id="addBtn"
+                        onClick={() => {
+                            if (product) {
+                                addToCart({
+                                    productId: product.id.toString(),
+                                    name: product.name,
+                                    price: parseFloat(product.price || product.sale_price || "0"),
+                                    image: product.images[0]?.src || "",
+                                    finish: selectedFinish,
+                                    slug: product.slug,
+                                });
+                            }
+                        }}
+                    >
+                        Add to Cart
+                    </button>
                     {/* <button className="wishlist-btn">Save to Wishlist</button> */}
                     <p className="short-desc" dangerouslySetInnerHTML={{ __html: product?.short_description }}></p>
                     <div className="meta-row">
@@ -125,7 +160,23 @@ export default function Product({ slug }: { slug?: string }) {
                     <span className="sticky-name">{product?.name}</span>
                     <span className="sticky-price">Rs {product?.price}</span>
                 </div>
-                <button className="sticky-btn">Add to Cart</button>
+                <button
+                    className="sticky-btn"
+                    onClick={() => {
+                        if (product) {
+                            addToCart({
+                                productId: product.id.toString(),
+                                name: product.name,
+                                price: parseFloat(product.price || product.sale_price || "0"),
+                                image: product.images[0]?.src || "",
+                                finish: selectedFinish,
+                                slug: product.slug,
+                            });
+                        }
+                    }}
+                >
+                    Add to Cart
+                </button>
             </div>
         </>
     )
