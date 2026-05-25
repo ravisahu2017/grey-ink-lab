@@ -119,7 +119,8 @@ export default function CartDrawer() {
                         <button
                             className="cart-checkout-btn"
                             onClick={() => {
-                                alert("Checkout integration coming soon!");
+                                closeCart();
+                                window.location.href = "/checkout";
                             }}
                         >
                             Proceed to Checkout

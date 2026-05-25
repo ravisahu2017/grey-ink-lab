@@ -23,16 +23,19 @@ class ApiService {
   }
 
   private getHeaders(customHeaders: Record<string, string> = {}): Record<string, string> {
-    const headers: Record<string, string> = {
+    return {
       'Content-Type': 'application/json',
       ...customHeaders,
     };
+  }
 
-    const key = "ck_ef1547b8191c2f2a6fad77cad3283a6f051ff69c";
-    const secret = "cs_ae7f8a52d44a12f025db5887c129e93e2bcbb933";
-    const auth = Buffer.from(`${key}:${secret}`).toString('base64');
-    headers['Authorization'] = `Basic ${auth}`;
-    return headers;
+  private getAuthUrl(endpoint: string): string {
+    const url = `${this.baseUrl}${endpoint}`;
+    const key = process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_KEY;
+    const secret = process.env.NEXT_PUBLIC_WOOCOMMERCE_CONSUMER_SECRET;
+    if (!key || !secret) return url;
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}consumer_key=${key}&consumer_secret=${secret}`;
   }
 
   /**
@@ -42,7 +45,7 @@ class ApiService {
     endpoint: string,
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = this.getAuthUrl(endpoint);
 
     try {
       console.log(`GET request to: ${url}`);
@@ -90,7 +93,7 @@ class ApiService {
     data: any,
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = this.getAuthUrl(endpoint);
 
     try {
       console.log(`POST request to: ${url}`);
@@ -140,7 +143,7 @@ class ApiService {
     formData: FormData,
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = this.getAuthUrl(endpoint);
 
     try {
       console.log(`POST FormData request to: ${url}`);
@@ -219,7 +222,7 @@ class ApiService {
     data: any,
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = this.getAuthUrl(endpoint);
 
     try {
       console.log(`PUT request to: ${url}`);
@@ -267,7 +270,7 @@ class ApiService {
     endpoint: string,
     options: RequestOptions = {}
   ): Promise<ApiResponse<T>> {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = this.getAuthUrl(endpoint);
 
     try {
       console.log(`DELETE request to: ${url}`);
@@ -309,5 +312,5 @@ class ApiService {
 }
 
 export default ApiService;
-export const woocommerceApi = new ApiService('http://localhost:8080/wp-json/wc/v3');
-
+const baseUrl = `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-json/wc/v3`;
+export const woocommerceApi = new ApiService(baseUrl);

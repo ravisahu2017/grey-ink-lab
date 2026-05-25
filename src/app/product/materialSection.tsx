@@ -2,7 +2,7 @@ export default function MaterialSection() {
     return (
         <section className="material-section fu">
             <div className="mat-visual">
-                <img src="http://localhost:8080/wp-content/uploads/2026/05/a1.jpeg" alt="" />
+                <img src="http://localhost:8080/wp-content/uploads/2026/05/cosmos.jpeg" alt="" />
             </div>
             <div className="mat-copy">
                 <div className="mat-label">Material & Making</div>
