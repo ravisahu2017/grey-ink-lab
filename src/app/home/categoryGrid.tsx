@@ -1,5 +1,7 @@
-"use client"
+"use client";
 
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import productController from "@/controllers/productController";
 import { Product } from "@/models/product";
 import { useEffect, useState } from "react";
@@ -8,7 +10,7 @@ import './categoryGrid.css'
 
 
 export default function CategoryGrid({ category }: { category: any }) {
-
+    const router = useRouter();
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
@@ -20,12 +22,8 @@ export default function CategoryGrid({ category }: { category: any }) {
         });
     }, [category]);
 
-    const goToCatalogue = (slug: string) => {
-        window.location.href = `/catalogue/${slug}`;
-    }
-
     const goToProduct = (slug: string) => {
-        window.location.href = `/product?slug=${slug}`;
+        router.push(`/product?slug=${slug}`);
     }
 
     return (
@@ -35,7 +33,11 @@ export default function CategoryGrid({ category }: { category: any }) {
                     <h2 className="sec-title">{category?.name}</h2>
                     <span className="sec-subtitle">From the studio</span>
                 </div>
-                <a href="#" className="sec-viewall" onClick={() => goToCatalogue(category?.slug)}>View all</a>
+                {category?.slug && (
+                    <Link href={`/catalogue/${category.slug}`} className="sec-viewall">
+                        View all
+                    </Link>
+                )}
             </div>
             <div className="product-grid">
                 {products.map((product: Product, index: number) => (

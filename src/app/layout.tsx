@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 import Footer from "@/components/Footer";
-import ScrollObserver from "@/components/ScrollObserver";
 import { CartProvider } from "@/context/CartContext";
 import { CategoryProvider } from "@/context/CategoryContext";
 import CartDrawer from "@/components/cart/CartDrawer";
@@ -36,7 +35,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <CategoryProvider>
           <CartProvider>
-            <ScrollObserver />
             <NavBar />
             {children}
             <CartDrawer />

@@ -10,6 +10,7 @@ import MaterialSection from "./materialSection";
 import CareSection from "./careSection";
 import DarkBand from "./darkBand";
 import { useCart } from "@/context/CartContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Product({ slug }: { slug?: string }) {
     const { addToCart } = useCart();
@@ -17,6 +18,7 @@ export default function Product({ slug }: { slug?: string }) {
     const [openAccordian, setOpenAccordian] = useState<string>('');
     const [accordianData, setAccordianData] = useState<any[]>([]);
     const [selectedFinish, setSelectedFinish] = useState<string>("Raw Concrete");
+    useScrollAnimation(product);
 
     const fetchProduct = async () => {
         const response = await productController.getProductById(slug ?? '');

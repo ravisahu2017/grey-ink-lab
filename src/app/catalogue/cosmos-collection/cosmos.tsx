@@ -6,6 +6,7 @@ import { Product } from "@/models/product";
 import productController from "@/controllers/productController";
 import { useRouter } from "next/navigation";
 import { useCategory } from "@/context/CategoryContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import AlsoExplore from "../alsoExplore";
 import CategoryBanner from "../categoryBanner";
 
@@ -13,6 +14,7 @@ export default function CosmosCollection() {
     const { getCategoryIdBySlug } = useCategory();
     const categoryId = getCategoryIdBySlug("cosmos-collection") || 23;
     const [products, setProducts] = useState<Product[]>([]);
+    useScrollAnimation(products);
     const router = useRouter();
     const fetchRelatedProducts = async () => {
         const response = await productController.getProducts({ category: categoryId });

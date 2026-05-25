@@ -1,9 +1,11 @@
 import "@/app/globals.css"
 import { useCategory } from "@/context/CategoryContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function AlsoExplore({ currentCategory }: { currentCategory: number }) {
     const { categories } = useCategory();
     const displayCategories = categories.filter((category: any) => category.id !== currentCategory);
+    useScrollAnimation(displayCategories);
 
     return (
         <div className="also-explore fu">

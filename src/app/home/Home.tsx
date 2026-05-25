@@ -1,12 +1,16 @@
 "use client";
 
 import { useCategory } from "@/context/CategoryContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRouter } from "next/navigation";
 import CategoryGrid from "./categoryGrid";
 import Category from "./category";
 import "./hero.css";
 
 export default function Home() {
     const { categories, isLoading } = useCategory();
+    const router = useRouter();
+    useScrollAnimation(categories);
 
     const tissueHolderCategory = categories.find((category: any) => category.slug === 'tissue-holder');
     const heroImage = tissueHolderCategory?.image?.src || `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-content/uploads/2026/05/product_1.jpeg`;
@@ -28,7 +32,7 @@ export default function Home() {
                 <div className="hero-intro">
                     <h1 className="hero-title">Functional <em>art for</em> everyday living.</h1>
                     <p className="hero-desc">Greyinklab creates functional sculptures from concrete — shaped slowly, finished by hand, designed to hold presence in the everyday spaces you live in.</p>
-                    <button className="btn-hero-story" onClick={() => window.location.href = '/story'}>Learn Our Story</button>
+                    <button className="btn-hero-story" onClick={() => router.push('/story')}>Learn Our Story</button>
                 </div>
             </section>
 
