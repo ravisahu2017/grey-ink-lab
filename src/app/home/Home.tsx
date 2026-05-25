@@ -16,7 +16,7 @@ export default function Home() {
     }, []);
 
     const tissueHolderCategory = categories.find((category: any) => category.slug === 'tissue-holder');
-    const heroImage = tissueHolderCategory?.image?.src || "http://localhost:8080/wp-content/uploads/2026/05/product_1.jpeg";
+    const heroImage = tissueHolderCategory?.image?.src || `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-content/uploads/2026/05/product_1.jpeg`;
 
     return (
         <>

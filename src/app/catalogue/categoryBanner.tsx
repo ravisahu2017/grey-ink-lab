@@ -3,7 +3,7 @@ export default function CategoryBanner() {
     return (
         <div className="cat-banner fu">
             <div className="cb-visual">
-                <img src="http://localhost:8080/wp-content/uploads/2026/05/lg3.jpeg" alt="Category Banner" />
+                <img src={`${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-content/uploads/2026/05/lg3.jpeg`} alt="Category Banner" />
             </div>
             <div className="cb-copy">
                 <div className="cb-label">The making</div>

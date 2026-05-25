@@ -157,7 +157,7 @@ export default function MyOrders() {
                                         <div className="order-item-main">
                                             <div className="order-item-thumb">
                                                 <img
-                                                    src={item.image?.src || "http://localhost:8080/wp-content/uploads/2026/05/product_1.jpeg"}
+                                                    src={item.image?.src || `${process.env.NEXT_PUBLIC_WP_BACKEND_BASE}/wp-content/uploads/2026/05/product_1.jpeg`}
                                                     alt={item.name}
                                                 />
                                             </div>
