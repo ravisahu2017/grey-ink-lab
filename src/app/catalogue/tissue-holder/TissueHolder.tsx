@@ -64,7 +64,7 @@ export default function TissueHolder() {
                     <div className="pc fu" key={product.id}>
                         <div className="pc-img">
                             <img src={product.images[0].src} alt={product.name} />
-                            <div className="pc-ov"><div className="pc-ov-btn" onClick={() => { router.push(`/product?id=${product.sku}`) }}>Quick View</div></div>
+                            <div className="pc-ov"><div className="pc-ov-btn" onClick={() => { router.push(`/product?slug=${product.slug}`) }}>Quick View</div></div>
                             {productController.isBestSeller(product) && <div className="pc-tag">Bestseller</div>}
                         </div>
                         <div className="pc-name">{product.name}</div>
