@@ -1,6 +1,7 @@
 "use client";
 
 import "@/app/globals.css";
+import "./product.css";
 import productController from "@/controllers/productController";
 import { useEffect, useState } from "react";
 import YouMayAlsoLike from "./ymal/YouMayAlsoLike";
@@ -11,22 +12,38 @@ import CareSection from "./careSection";
 import DarkBand from "./darkBand";
 import { useCart } from "@/context/CartContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Product } from "@/models/product";
 
-export default function Product({ slug }: { slug?: string }) {
+export default function ProductPage({ slug }: { slug?: string }) {
     const { addToCart } = useCart();
-    const [product, setProduct] = useState<any>(null);
+    const [product, setProduct] = useState<Product | null>(null);
     const [openAccordian, setOpenAccordian] = useState<string>('');
     const [accordianData, setAccordianData] = useState<any[]>([]);
     const [selectedFinish, setSelectedFinish] = useState<string>("Raw Concrete");
+    const [isStickyVisible, setIsStickyVisible] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<any>({ src: '' });
     useScrollAnimation(product);
 
     const fetchProduct = async () => {
         const response = await productController.getProductById(slug ?? '');
         setProduct(response[0]);
         setAccordianData(response[0].attributes);
+        fetchProductVariations(response[0])
     }
 
-    const [isStickyVisible, setIsStickyVisible] = useState(false);
+    const fetchProductVariations = async (product: Product) => {
+        if (!product.variations || product.variations.length === 0) {
+            setProduct(product);
+            setSelectedImage(product.images[0]);
+            return;
+        }
+        const res = await productController.getProductVariationsById(product, product.variations[0]);
+        console.log(res);
+        setProduct(res);
+        setSelectedImage(res.images[0]);
+    }
+
+
 
     useEffect(() => {
         fetchProduct();
@@ -47,15 +64,15 @@ export default function Product({ slug }: { slug?: string }) {
 
     return (
         <>
-            <section className="product-hero" id={product?.id}>
+            <section className="product-hero" id={`${product?.id}`}>
                 <div className="gallery">
                     <div className="gallery-main">
-                        <img src={product?.images[0].src} alt="" />
+                        <img src={selectedImage.src} alt="" />
                     </div>
                     <div className="gallery-thumbs">
                         {
                             product?.images?.map((image: any) => (
-                                <img key={image.id} src={image.thumbnail} alt="" />
+                                <img key={image.id} src={image.thumbnail || image.src} alt="" onClick={() => setSelectedImage(image)} />
                             ))
                         }
                     </div>
@@ -64,7 +81,7 @@ export default function Product({ slug }: { slug?: string }) {
                 <div className="product-info">
                     <div className="prod-collection">Collectibles — From the Studio</div>
                     <h1 className="prod-name">{product?.name}</h1>
-                    <div className="prod-subtitle">{productController.getTitleSubscript(product)}</div>
+                    <div className="prod-subtitle">{product?.title_subscript || ''}</div>
                     <div className="prod-price flex items-center gap-2">
                         <span>Rs </span>
                         {product?.regular_price === product?.sale_price ? (
@@ -123,7 +140,7 @@ export default function Product({ slug }: { slug?: string }) {
                         Add to Cart
                     </button>
                     {/* <button className="wishlist-btn">Save to Wishlist</button> */}
-                    <p className="short-desc" dangerouslySetInnerHTML={{ __html: product?.short_description }}></p>
+                    <p className="short-desc" dangerouslySetInnerHTML={{ __html: product?.short_description || '' }}></p>
                     <div className="meta-row">
                         <span className="meta-pill">Cast Concrete</span>
                         <span className="meta-pill">Handmade</span>
@@ -156,7 +173,7 @@ export default function Product({ slug }: { slug?: string }) {
             <LifeGrid />
             <CareSection />
             <DarkBand />
-            <YouMayAlsoLike id={product?.id} />
+            <YouMayAlsoLike id={product?.id.toString() || ''} />
             <div className={`sticky-bar ${isStickyVisible ? 'visible' : ''}`} id="stickyBar">
                 <div className="sticky-info">
                     <span className="sticky-name">{product?.name}</span>

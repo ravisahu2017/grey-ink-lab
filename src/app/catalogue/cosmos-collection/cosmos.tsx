@@ -66,10 +66,10 @@ export default function CosmosCollection() {
                         <div className="pc-img">
                             <img src={product.images[0].src} alt={product.name} />
                             <div className="pc-ov"><div className="pc-ov-btn" onClick={() => { router.push(`/product?id=${product.sku}`) }}>Quick View</div></div>
-                            {productController.isBestSeller(product) && <div className="pc-tag">Bestseller</div>}
+                            {product.isBestSeller && <div className="pc-tag">Bestseller</div>}
                         </div>
                         <div className="pc-name">{product.name}</div>
-                        <div className="pc-sub">{productController.getTitleSubscript(product)}</div>
+                        <div className="pc-sub">{product.title_subscript}</div>
                         <div className="pc-bottom"><span className="pc-price">Rs {product.price}</span><span className="pc-craft">Made to order</span></div>
                     </div>
                 ))}

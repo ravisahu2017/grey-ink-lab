@@ -47,17 +47,17 @@ async function handleProxy(req: NextRequest) {
       }
     });
 
-    // Securely attach auth credentials on the server side
-    if (key && secret) {
-      targetUrl.searchParams.set("consumer_key", key);
-      targetUrl.searchParams.set("consumer_secret", secret);
-    }
-
     // Forward request method and headers
     const method = req.method;
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
     };
+
+    // Securely attach auth credentials on the server side
+    if (key && secret) {
+      const token = Buffer.from(`${key}:${secret}`).toString("base64");
+      headers["Authorization"] = `Basic ${token}`;
+    }
 
     // Forward request body if applicable
     let body: string | undefined;

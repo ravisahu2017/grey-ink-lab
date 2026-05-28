@@ -1,4 +1,10 @@
 export interface Product {
+    colors: string[];
+    variationId?: number;
+    title_subscript?: string;
+    isBestSeller?: boolean;
+
+
     id: number;
     name: string;
     slug: string;

@@ -153,40 +153,6 @@ nav {
   color: var(--ink-soft);
 }
 
-.product-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - 68px);
-  padding: 32px 52px 80px;
-}
-
-.gallery {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 12px;
-  padding-right: 40px;
-}
-
-.gallery-main {
-  overflow: hidden;
-  background: #E8E4DC;
-}
-
-.gallery-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  max-height: 72vh;
-  object-position: center;
-  transition: opacity .3s;
-}
-
-.gallery-thumbs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
 
 .thumb {
   aspect-ratio: 1;
@@ -211,67 +177,7 @@ nav {
   display: block;
 }
 
-.product-info {
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 8px;
-}
 
-.prod-collection {
-  font-size: 9px;
-  font-weight: 300;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--stone-light);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.prod-collection::before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: .5px;
-  background: var(--stone-light);
-}
-
-.prod-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(38px, 4vw, 54px);
-  font-weight: 300;
-  color: var(--ink);
-  line-height: 1.05;
-  letter-spacing: .02em;
-  margin-bottom: 8px;
-}
-
-.prod-subtitle {
-  font-size: 12px;
-  font-weight: 300;
-  letter-spacing: .1em;
-  color: var(--stone);
-  margin-bottom: 24px;
-}
-
-.prod-price {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--ink);
-  margin-bottom: 5px;
-}
-
-.prod-tax {
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: .12em;
-  color: var(--stone-light);
-  margin-bottom: 28px;
-}
 
 .availability {
   display: flex;
